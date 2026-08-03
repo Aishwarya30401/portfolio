@@ -21,7 +21,7 @@ const skills = [
   {
     name: "TypeScript",
     icon: "fas fa-code",
-    percentage: 85,
+    percentage: 95,
     color: "#3178c6"
   },
   {
@@ -42,12 +42,12 @@ const skills = [
     percentage: 90,
     color: "#7952b3"
   },
-  {
-    name: "Pinia",
-    icon: "fas fa-lemon",
-    percentage: 90,
-    color: "#ffd43b"
-  },
+ {
+  name: "Pinia",
+  icon: "fas fa-layer-group",
+  percentage: 90,
+  color: "#ffd43b"
+},
   {
     name: "Git & GitHub",
     icon: "fab fa-github",
@@ -183,4 +183,5 @@ const skills = [
   border-radius: 30px;
   background: linear-gradient(90deg, #7b2ff7, #b245ff);
 }
+
 </style>

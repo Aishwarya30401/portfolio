@@ -19,7 +19,7 @@
         <div class="card">
           <span class="year">2023 - Present</span>
 
-          <h2>Frontend Developer</h2>
+          <h2>software Engineer</h2>
 
           <h4>Span Technologies Services Private Limited</h4>
 
@@ -33,7 +33,7 @@
       </div>
 
       <!-- Item 2 -->
-      <div class="timeline-item">
+      <!-- <div class="timeline-item">
         <div class="icon active">
           💼
         </div>
@@ -51,7 +51,7 @@
             <li>Improved application performance and SEO.</li>
           </ul>
         </div>
-      </div>
+      </div> -->
 
       <!-- Item 3 -->
       <div class="timeline-item">
@@ -60,15 +60,15 @@
         </div>
 
         <div class="card">
-          <span class="year">2021 - 2022</span>
+          <span class="year">2022 - 2023</span>
 
           <h2>Jr. Frontend Developer</h2>
 
-          <h4>Span Technologies Services Private Limited</h4>
+          <h4>Zen N Zeal Private Limited</h4>
 
           <ul>
             <li>Developed responsive UI using Vue.js and Bootstrap.</li>
-            <li>Consumed REST APIs and implemented UI functionality.</li>
+            <li>Developed responsive UI using Html, Css, Wordpress.</li>
             <li>Fixed bugs and improved user experience.</li>
           </ul>
         </div>
@@ -202,5 +202,8 @@
   .card h2 {
     font-size: 22px;
   }
+  .container {
+  min-height: 100vh;
+}
 }
 </style>

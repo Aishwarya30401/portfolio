@@ -1,3 +1,50 @@
+<script setup lang="ts">
+import { ref } from "vue";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
+const name = ref("");
+const email = ref("");
+const message = ref("");
+
+const sendMessage = () => {
+  const text = `Hi Aishwarya,
+
+Name: ${name.value}
+
+Email: ${email.value}
+
+Message: ${message.value}`;
+
+  // Open WhatsApp
+  const whatsappUrl = `https://wa.me/919791719807?text=${encodeURIComponent(
+    text
+  )}`;
+
+  window.open(whatsappUrl, "_blank");
+
+  // Open email client
+  const mailUrl = `mailto:aishu30401@gmail.com?subject=Portfolio Contact&body=${encodeURIComponent(
+    text
+  )}`;
+
+  setTimeout(() => {
+    window.location.href = mailUrl;
+  }, 1000);
+
+  // Clear form
+  name.value = "";
+  email.value = "";
+  message.value = "";
+};
+
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
+</script>
+
 <template>
   <section class="contact-section">
     <div class="container">
@@ -5,6 +52,7 @@
 
       <div class="left">
         <h1>Let's Work Together</h1>
+
         <p>Have a project in mind? Let's connect.</p>
 
         <div class="info-list">
@@ -48,7 +96,7 @@
 
             <div>
               <h4>LinkedIn</h4>
-              <span>linkedin.com/in/aishwarya-v</span>
+              <span>linkedin.com/in/aishwarya-v-960692408</span>
             </div>
           </div>
 
@@ -59,7 +107,7 @@
 
             <div>
               <h4>GitHub</h4>
-              <span>github.com/aishwaryav</span>
+              <span>github.com/Aishwarya30401</span>
             </div>
           </div>
         </div>
@@ -68,17 +116,33 @@
       <!-- Right Side -->
 
       <div class="right">
-        <form>
+        <form @submit.prevent="sendMessage">
+          
           <label>Your Name</label>
-          <input type="text" placeholder="Enter your name" />
+
+          <input
+            v-model="name"
+            type="text"
+            placeholder="Enter your name"
+            required
+          />
 
           <label>Your Email</label>
-          <input type="email" placeholder="Enter your email" />
+
+          <input
+            v-model="email"
+            type="email"
+            placeholder="Enter your email"
+            required
+          />
 
           <label>Your Message</label>
+
           <textarea
+            v-model="message"
             rows="6"
             placeholder="Write your message..."
+            required
           ></textarea>
 
           <button type="submit">
@@ -96,7 +160,7 @@
 
       <p>© 2026 Aishwarya V. All rights reserved.</p>
 
-      <button class="top-btn">
+      <button class="top-btn" @click="scrollToTop">
         <i class="fas fa-arrow-up"></i>
       </button>
     </footer>
@@ -121,6 +185,7 @@
   display: flex;
   justify-content: space-between;
   gap: 50px;
+  min-height: 100vh;
 }
 
 .left {
@@ -169,6 +234,7 @@
 
 .info-item span {
   color: #b8b8b8;
+  word-break: break-word;
 }
 
 .right {
@@ -198,6 +264,7 @@ textarea {
   padding: 15px;
   color: white;
   outline: none;
+  font-size: 15px;
 }
 
 input:focus,
@@ -215,6 +282,11 @@ button {
   color: white;
   font-size: 16px;
   background: linear-gradient(90deg, #7c3aed, #a855f7);
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: translateY(-2px);
 }
 
 button i {
@@ -240,6 +312,8 @@ footer h2 {
   border-radius: 50%;
 }
 
+/* Tablet */
+
 @media (max-width: 900px) {
   .contact-section {
     padding: 30px;
@@ -261,6 +335,26 @@ footer h2 {
   footer {
     flex-direction: column;
     gap: 20px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 576px) {
+  .contact-section {
+    padding: 20px;
+  }
+
+  .left h1 {
+    font-size: 30px;
+  }
+
+  form {
+    padding: 20px;
+  }
+
+  footer h2 {
+    font-size: 32px;
   }
 }
 </style>

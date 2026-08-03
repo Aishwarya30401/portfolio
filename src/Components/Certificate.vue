@@ -163,7 +163,9 @@ const certificates = [
 .content {
   padding: 22px;
 }
-
+.container {
+  min-height: 100vh;
+}
 .content h3 {
   color: white;
   margin-bottom: 10px;

@@ -17,6 +17,7 @@
     "format": "oxfmt src/"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@fortawesome/fontawesome-free": "^7.3.1",
     "pinia": "^3.0.4",
     "vue": "^3.5.38",

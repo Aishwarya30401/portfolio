@@ -4,7 +4,7 @@ const projects = [
     title: "TaxBandits",
     description:
       "A tax filing platform where I developed responsive UI components, integrated REST APIs, and improved application performance using Vue.js.",
-    technologies: ["Vue.js", "TypeScript", "Bootstrap", "REST API"],
+    technologies: ["Vue.js", "TypeScript", "Vuetify", "REST API", "Vue3" , "Vue2", "Nuxt.js", "Composition API", "Option API"],
     github: "#",
     live: "https://www.taxbandits.com/"
   },
@@ -134,5 +134,8 @@ h2 {
 .buttons a:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 25px rgba(123, 47, 247, 0.45);
+}
+.container {
+  min-height: 100vh;
 }
 </style>
