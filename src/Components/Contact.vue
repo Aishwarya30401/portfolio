@@ -1,11 +1,17 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref , onMounted} from "vue";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const name = ref("");
 const email = ref("");
 const message = ref("");
-
+const isLoading = ref(true);
+onMounted(() => {
+  isLoading.value = true;
+  setTimeout(() => {
+    isLoading.value = false;
+  }, 300); // Show loader for 1.5 seconds
+});
 const sendMessage = () => {
   const text = `Hi Aishwarya,
 
@@ -46,7 +52,10 @@ const scrollToTop = () => {
 </script>
 
 <template>
-  <section class="contact-section">
+  <div v-if="isLoading" class="loader-container">
+  <div class="loader"></div>
+</div>
+  <section class="contact-section" v-else>
     <div class="container">
       <!-- Left Side -->
 
@@ -355,6 +364,39 @@ footer h2 {
 
   footer h2 {
     font-size: 32px;
+  }
+}
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #07111f;
+  z-index: 9999;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+
+  border: 5px solid #b245ff;
+  border-top: 5px solid #e5e5e5;
+
+  border-radius: 50%;
+
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>

@@ -1,12 +1,23 @@
 <script setup lang="ts">
+import { ref, onMounted } from "vue";
 const projects = [
   {
     title: "TaxBandits",
     description:
       "A tax filing platform where I developed responsive UI components, integrated REST APIs, and improved application performance using Vue.js.",
-    technologies: ["Vue.js", "TypeScript", "Vuetify", "REST API", "Vue3" , "Vue2", "Nuxt.js", "Composition API", "Option API"],
+    technologies: [
+      "Vue.js",
+      "TypeScript",
+      "Vuetify",
+      "REST API",
+      "Vue3",
+      "Vue2",
+      "Nuxt.js",
+      "Composition API",
+      "Option API",
+    ],
     github: "#",
-    live: "https://www.taxbandits.com/"
+    live: "https://www.taxbandits.com/",
   },
   {
     title: "Portfolio Website",
@@ -14,7 +25,7 @@ const projects = [
       "A personal portfolio built with Vue 3 and TypeScript showcasing my skills, projects, and experience with smooth animations.",
     technologies: ["Vue 3", "TypeScript", "Vite", "CSS3"],
     github: "https://github.com/yourusername/portfolio",
-    live: "#"
+    live: "#",
   },
   {
     title: "Authentication System",
@@ -22,26 +33,40 @@ const projects = [
       "Implemented Firebase Authentication and Single Sign-On (SSO) with secure login, route guards, and user session management.",
     technologies: ["Vue.js", "Firebase", "SSO", "Pinia"],
     github: "#",
-    live: "#"
-  }
-]
-</script><template>
-    <section class="projects">
-        <div class="container">
-            <h2>My Projects</h2>
-            <p class="subtitle"> Here are some of the projects I have worked on. </p>
-            <div class="project-grid">
-                <div v-for="project in projects" :key="project.title" class="project-card">
-                    <h3>{{ project.title }}</h3>
-                    <p>{{ project.description }}</p>
-                    <div class="tech"> <span v-for="tech in project.technologies" :key="tech"> {{ tech }} </span> </div>
-                    <div class="buttons"> <a :href="project.github" target="_blank" v-if="project.github !== '#'">
-                            GitHub </a> <a :href="project.live" target="_blank" v-if="project.live !== '#'"> Live Demo
-                        </a> </div>
-                </div>
-            </div>
+    live: "#",
+  },
+];
+const isLoading = ref(true);
+onMounted(() => {
+  // isLoading.value = true;
+  setTimeout(() => {
+    isLoading.value = false;
+  }, 300); // Show loader for 1.5 seconds
+});
+</script>
+<template>
+  <div v-if="isLoading" class="loader-container">
+    <div class="loader"></div>
+  </div>
+  <section class="projects" v-else>
+    <div class="container">
+      <h2>My Projects</h2>
+      <p class="subtitle">Here are some of the projects I have worked on.</p>
+      <div class="project-grid">
+        <div v-for="project in projects" :key="project.title" class="project-card">
+          <h3>{{ project.title }}</h3>
+          <p>{{ project.description }}</p>
+          <div class="tech">
+            <span v-for="tech in project.technologies" :key="tech"> {{ tech }} </span>
+          </div>
+          <div class="buttons">
+            <a :href="project.github" target="_blank" v-if="project.github !== '#'"> GitHub </a>
+            <a :href="project.live" target="_blank" v-if="project.live !== '#'"> Live Demo </a>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 </template>
 <style scoped>
 .projects {
@@ -137,5 +162,39 @@ h2 {
 }
 .container {
   min-height: 100vh;
+}
+
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #07111f;
+  z-index: 9999;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+
+  border: 5px solid #b245ff;
+  border-top: 5px solid #e5e5e5;
+
+  border-radius: 50%;
+
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>

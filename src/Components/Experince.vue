@@ -1,5 +1,20 @@
+<script>
+import { ref , onMounted} from "vue";
+
+const isLoading = ref(true);
+onMounted(() => {
+  // isLoading.value = true;
+  setTimeout(() => {
+    isLoading.value = false;
+  }, 300); // Show loader for 1.5 seconds
+});
+</script>
+
 <template>
-  <section class="experience-section">
+  <div v-if="isLoading" class="loader-container">
+  <div class="loader"></div>
+</div>
+  <section class="experience-section" v-else>
     <div class="header">
       <span class="dot"></span>
       <div>
@@ -205,5 +220,38 @@
   .container {
   min-height: 100vh;
 }
+}
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #07111f;
+  z-index: 9999;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+
+  border: 5px solid #b245ff;
+  border-top: 5px solid #e5e5e5;
+
+  border-radius: 50%;
+
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>

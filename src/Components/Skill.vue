@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref , onMounted} from "vue";
 const skills = [
   {
     name: "Vue.js",
@@ -55,10 +56,21 @@ const skills = [
     color: "#ffffff"
   }
 ]
+
+const isLoading = ref(true);
+onMounted(() => {
+  // isLoading.value = true;
+  setTimeout(() => {
+    isLoading.value = false;
+  }, 300); // Show loader for 1.5 seconds
+});
 </script>
 
 <template>
-  <section class="skills">
+  <div v-if="isLoading" class="loader-container">
+  <div class="loader"></div>
+</div>
+  <section class="skills" v-else>
     <div class="container">
       <div class="heading">
         <span class="dot"></span>
@@ -183,5 +195,37 @@ const skills = [
   border-radius: 30px;
   background: linear-gradient(90deg, #7b2ff7, #b245ff);
 }
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
 
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #07111f;
+  z-index: 9999;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+
+  border: 5px solid #b245ff;
+  border-top: 5px solid #e5e5e5;
+
+  border-radius: 50%;
+
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 </style>

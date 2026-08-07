@@ -1,14 +1,23 @@
 <script setup lang="ts">
+import { ref,onMounted  } from "vue";
 import photonew from "../assets/shine start.jpeg";
 
-import c1 from "../../public/Screenshot 2026-08-06 145924.png";
-import c2 from "../../public/Screenshot 2026-08-06 145938.png";
-import c3 from "../../public/Screenshot 2026-08-06 145949.png";
+import c1 from "../../public/Gemini_Generated_Image_vyqd41vyqd41vyqd (1).png";
+import c2 from "../../public/Gemini_Generated_Image_78dnoe78dnoe78dn (1).png";
+import c3 from "../../public/Gemini_Generated_Image_kigik8kigik8kigi.png";
 import c4 from "../../public/Screenshot 2026-08-06 154143.png";
 import c5 from "../../public/Screenshot 2026-08-06 154322.png";
-import c6 from "../../public/Screenshot 2026-08-06 174405.png";
-import c7 from "../../public/Screenshot 2026-08-06 174417.png";
+import c6 from "../../public/Gemini_Generated_Image_c0erq9c0erq9c0er.png";
+import c7 from "../../public/Gemini_Generated_Image_b0kqxgb0kqxgb0kq.png";
 import c8 from "../../public/Screenshot 2026-08-06 174432.png";
+
+const isLoading = ref(true);
+onMounted(() => {
+  // isLoading.value = true;
+  setTimeout(() => {
+    isLoading.value = false;
+  }, 400); // Show loader for 1.5 seconds
+});
 
 const certificates = [
   {
@@ -80,7 +89,10 @@ const certificates = [
 </script>
 
 <template>
-  <section class="certificate">
+  <div v-if="isLoading" class="loader-container">
+  <div class="loader"></div>
+</div>
+  <section class="certificate" v-else>
     <div class="container">
       <div class="heading">
         <span class="dot"></span>
@@ -265,6 +277,40 @@ const certificates = [
   .content a {
     width: 100%;
     text-align: center;
+  }
+}
+
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #07111f;
+  z-index: 9999;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+
+  border: 5px solid #b245ff;
+  border-top: 5px solid #e5e5e5;
+
+  border-radius: 50%;
+
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>

@@ -21,10 +21,17 @@ const menuItems = [
   { name: "Experience", id: "experience" },
   { name: "Contact", id: "contact" },
 ];
-
+// const isLoading = ref(false);
 function redirectToItem(id: string) {
   activeSection.value = id;
   menuOpen.value = false;
+    // isLoading.value = true;
+
+  // setTimeout(() => {
+  //   activeSection.value = id;
+  //   isLoading.value = false;
+  //   menuOpen.value = false;
+  // }, 500);
 }
 
 function hireMe() {
@@ -34,7 +41,9 @@ function hireMe() {
 
 function toggleMenu() {
   menuOpen.value = !menuOpen.value;
-}
+}0
+
+
 </script>
 
 <template>
@@ -57,7 +66,10 @@ function toggleMenu() {
 
     <button class="hire-btn" @click="hireMe">Hire Me</button>
   </header>
-  <main class="content">
+<!-- <div v-if="isLoading" class="loader-container">
+  <div class="loader"></div>
+</div> -->
+  <main class="content" >
     <HomeInfo v-if="activeSection === 'home'" />
 
     <About v-if="activeSection === 'about'" />
@@ -104,6 +116,7 @@ function toggleMenu() {
 
 .logo img {
   width: 70px;
+  height: 70px;
 }
 
 .nav-links {
@@ -213,6 +226,40 @@ function toggleMenu() {
     align-items: center;
     gap: 20px;
     padding: 30px 0;
+  }
+
+}
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #07111f;
+  z-index: 9999;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+
+  border: 5px solid #b245ff ;
+  border-top: 5px solid #e5e5e5;
+
+  border-radius: 50%;
+
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>
