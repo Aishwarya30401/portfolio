@@ -57,7 +57,7 @@ onMounted(() => {
           <button class="talk" @click="letsTalk">Let's Talk</button>
         </div>
 
-        <!-- SOCIAL ICONS WITH BRAND COLORS -->
+        <!-- SOCIAL ICONS -->
         <div class="socials">
           <a
             href="https://www.linkedin.com/in/aishwarya-v-4141131b4/"
@@ -79,7 +79,8 @@ onMounted(() => {
             <i class="fab fa-github"></i>
           </a>
 
-          <a href="mailto:aishu30401@gmail.com" title="Email" class="gmail-icon">
+          <!-- Blue Email Icon -->
+          <a href="mailto:aishu30401@gmail.com" title="Email" class="email-icon">
             <i class="fas fa-envelope"></i>
           </a>
 
@@ -248,7 +249,7 @@ h2 {
   filter: brightness(1.15);
 }
 
-/* OFFICIAL BRAND BACKGROUND GRADIENTS */
+/* ICON COLORS */
 .linkedin-icon {
   background: linear-gradient(135deg, #0a66c2, #004182);
 }
@@ -258,8 +259,9 @@ h2 {
   border: 1px solid #30363d;
 }
 
-.gmail-icon {
-  background: linear-gradient(135deg, #ea4335, #c5221f);
+.email-icon {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border: 1px solid #3b82f6;
 }
 
 .whatsapp-icon {
