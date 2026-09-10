@@ -57,13 +57,14 @@ onMounted(() => {
           <button class="talk" @click="letsTalk">Let's Talk</button>
         </div>
 
-        <!-- SOCIAL ICONS -->
+        <!-- SOCIAL ICONS WITH BRAND COLORS -->
         <div class="socials">
           <a
             href="https://www.linkedin.com/in/aishwarya-v-4141131b4/"
             target="_blank"
             rel="noopener noreferrer"
             title="LinkedIn"
+            class="linkedin-icon"
           >
             <i class="fab fa-linkedin-in"></i>
           </a>
@@ -73,15 +74,16 @@ onMounted(() => {
             target="_blank"
             rel="noopener noreferrer"
             title="GitHub"
+            class="github-icon"
           >
             <i class="fab fa-github"></i>
           </a>
 
-          <a href="mailto:aishu30401@gmail.com" title="Email">
+          <a href="mailto:aishu30401@gmail.com" title="Email" class="gmail-icon">
             <i class="fas fa-envelope"></i>
           </a>
 
-          <a href="#" @click.prevent="openWhatsApp" title="WhatsApp">
+          <a href="#" @click.prevent="openWhatsApp" title="WhatsApp" class="whatsapp-icon">
             <i class="fab fa-whatsapp"></i>
           </a>
         </div>
@@ -235,7 +237,6 @@ h2 {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: #182235;
   color: white;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -243,8 +244,26 @@ h2 {
 }
 
 .socials a:hover {
-  background: #8b4bff;
   transform: translateY(-4px);
+  filter: brightness(1.15);
+}
+
+/* OFFICIAL BRAND BACKGROUND GRADIENTS */
+.linkedin-icon {
+  background: linear-gradient(135deg, #0a66c2, #004182);
+}
+
+.github-icon {
+  background: linear-gradient(135deg, #24292e, #161b22);
+  border: 1px solid #30363d;
+}
+
+.gmail-icon {
+  background: linear-gradient(135deg, #ea4335, #c5221f);
+}
+
+.whatsapp-icon {
+  background: linear-gradient(135deg, #25d366, #128c7e);
 }
 
 /* RIGHT SECTION - ENHANCED IMAGE DISPLAY */
@@ -260,7 +279,7 @@ h2 {
   position: relative;
   width: 100%;
   max-width: 380px;
-  aspect-ratio: 1 / 1; /* Locks 1:1 square ratio to prevent squishing into an oval */
+  aspect-ratio: 1 / 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -290,7 +309,7 @@ h2 {
 .profile-img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Prevents image distortion */
+  object-fit: cover;
   border-radius: 50%;
   display: block;
 }
@@ -361,7 +380,7 @@ h2 {
 
 @media (max-width: 900px) {
   .hero-container {
-    flex-direction: column-reverse; /* Places profile image on top on mobile/tablet */
+    flex-direction: column-reverse;
     text-align: center;
     gap: 40px;
   }
