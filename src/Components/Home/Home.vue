@@ -1,16 +1,19 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed, defineAsyncComponent } from "vue";
 
-import HomeInfo from "../HomeInfo.vue";
-import About from "../About.vue";
-import Skill from "../Skill.vue";
-import Project from "../Project.vue";
-import Certificate from "../Certificate.vue";
-import Experience from "../Experince.vue";
-import Contact from "../Contact.vue";
+// Dynamic imports to reduce initial bundle size
+const sectionComponents: Record<string, any> = {
+  home: defineAsyncComponent(() => import("../HomeInfo.vue")),
+  about: defineAsyncComponent(() => import("../About.vue")),
+  skills: defineAsyncComponent(() => import("../Skill.vue")),
+  projects: defineAsyncComponent(() => import("../Project.vue")),
+  certificate: defineAsyncComponent(() => import("../Certificate.vue")),
+  experience: defineAsyncComponent(() => import("../Experince.vue")),
+  contact: defineAsyncComponent(() => import("../Contact.vue")),
+};
 
 const activeSection = ref("home");
-const menuOpen = ref(false);
+const menuOpen = ref(false); // Closed by default on mobile, desktop stays open via CSS
 
 const menuItems = [
   { name: "Home", id: "home" },
@@ -21,17 +24,12 @@ const menuItems = [
   { name: "Experience", id: "experience" },
   { name: "Contact", id: "contact" },
 ];
-// const isLoading = ref(false);
+
+const currentComponent = computed(() => sectionComponents[activeSection.value]);
+
 function redirectToItem(id: string) {
   activeSection.value = id;
   menuOpen.value = false;
-    // isLoading.value = true;
-
-  // setTimeout(() => {
-  //   activeSection.value = id;
-  //   isLoading.value = false;
-  //   menuOpen.value = false;
-  // }, 500);
 }
 
 function hireMe() {
@@ -41,9 +39,7 @@ function hireMe() {
 
 function toggleMenu() {
   menuOpen.value = !menuOpen.value;
-}0
-
-
+}
 </script>
 
 <template>
@@ -52,37 +48,38 @@ function toggleMenu() {
       <img src="../../assets/loagonew.png" alt="logo" />
     </div>
 
-    <div class="hamburger" @click="toggleMenu">☰</div>
-
+    <!-- Navigation Menu (Always visible on Desktop) -->
     <nav :class="['nav-menu', { show: menuOpen }]">
       <ul class="nav-links">
-        <li v-for="item in menuItems" :key="item.id" :class="{ active: activeSection === item.id }">
+        <li
+          v-for="item in menuItems"
+          :key="item.id"
+          :class="{ active: activeSection === item.id }"
+        >
           <a href="#" @click.prevent="redirectToItem(item.id)">
             {{ item.name }}
           </a>
         </li>
       </ul>
+
+      <!-- Mobile Hire Me Button inside mobile dropdown -->
+      <button class="hire-btn mobile-hire-btn" @click="hireMe">Hire Me</button>
     </nav>
 
-    <button class="hire-btn" @click="hireMe">Hire Me</button>
+    <!-- Desktop Hire Me Button -->
+    <button class="hire-btn desktop-hire-btn" @click="hireMe">Hire Me</button>
+
+    <!-- Hamburger Toggle (Only displays on Mobile) -->
+    <button class="hamburger" @click="toggleMenu" aria-label="Toggle Navigation">
+      <span v-if="!menuOpen">☰</span>
+      <span v-else>✕</span>
+    </button>
   </header>
-<!-- <div v-if="isLoading" class="loader-container">
-  <div class="loader"></div>
-</div> -->
-  <main class="content" >
-    <HomeInfo v-if="activeSection === 'home'" />
 
-    <About v-if="activeSection === 'about'" />
-
-    <Skill v-if="activeSection === 'skills'" />
-
-    <Project v-if="activeSection === 'projects'" />
-
-    <Certificate v-if="activeSection === 'certificate'" />
-
-    <Experience v-if="activeSection === 'experience'" />
-
-    <Contact v-if="activeSection === 'contact'" />
+  <main class="content">
+    <KeepAlive>
+      <component :is="currentComponent" />
+    </KeepAlive>
   </main>
 </template>
 
@@ -100,23 +97,34 @@ function toggleMenu() {
   background: #07111f;
 }
 
+/* NAVBAR DESKTOP STYLES */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 90px;
-  background: #07111f;
+  background: rgba(7, 17, 31, 0.95);
+  backdrop-filter: blur(10px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 60px;
   z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
 }
 
 .logo img {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+/* DESKTOP NAV MENU: OPEN & VISIBLE */
+.nav-menu {
+  display: flex;
+  align-items: center;
 }
 
 .nav-links {
@@ -133,7 +141,7 @@ function toggleMenu() {
   color: white;
   text-decoration: none;
   font-size: 17px;
-  transition: 0.3s;
+  transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
@@ -162,26 +170,40 @@ function toggleMenu() {
   border-radius: 30px;
   background: linear-gradient(90deg, #7b2ff7, #b245ff);
   color: white;
+  font-weight: 600;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hire-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(178, 69, 255, 0.4);
 }
 
 .hamburger {
   display: none;
+  background: transparent;
+  border: none;
   color: white;
-  font-size: 30px;
+  font-size: 28px;
   cursor: pointer;
+  z-index: 1001;
+}
+
+.mobile-hire-btn {
+  display: none;
 }
 
 .content {
   padding-top: 90px;
   width: 100%;
+  min-height: 100vh;
 }
 
-/* Tablet */
-
+/* TABLET RESPONSIVENESS */
 @media (max-width: 1024px) {
   .navbar {
-    padding: 0 25px;
+    padding: 0 30px;
   }
 
   .nav-links {
@@ -193,73 +215,68 @@ function toggleMenu() {
   }
 }
 
-/* Mobile */
-
+/* MOBILE RESPONSIVENESS (Hamburger Triggered Only Here) */
 @media (max-width: 768px) {
   .navbar {
+    height: 75px;
     padding: 0 20px;
+  }
+
+  .logo img {
+    width: 50px;
+    height: 50px;
   }
 
   .hamburger {
     display: block;
   }
 
-  .hire-btn {
+  .desktop-hire-btn {
     display: none;
   }
 
   .nav-menu {
-    position: absolute;
-    top: 90px;
-    left: -100%;
+    position: fixed;
+    top: 75px;
+    right: -100%;
     width: 100%;
+    height: calc(100vh - 75px);
     background: #07111f;
-    transition: 0.4s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 40px;
+    gap: 30px;
+    transition: right 0.35s ease-in-out;
   }
 
   .nav-menu.show {
-    left: 0;
+    right: 0;
   }
 
   .nav-links {
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    padding: 30px 0;
+    gap: 25px;
+    width: 100%;
   }
 
-}
-.loader-container {
-  position: fixed;
-  top: 0;
-  left: 0;
+  .nav-links a {
+    font-size: 18px;
+    display: block;
+    padding: 8px 0;
+  }
 
-  width: 100%;
-  height: 100vh;
+  .mobile-hire-btn {
+    display: block;
+    margin-top: 15px;
+    width: 80%;
+    max-width: 250px;
+  }
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background: #07111f;
-  z-index: 9999;
-}
-
-.loader {
-  width: 50px;
-  height: 50px;
-
-  border: 5px solid #b245ff ;
-  border-top: 5px solid #e5e5e5;
-
-  border-radius: 50%;
-
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+  .content {
+    padding-top: 75px;
   }
 }
 </style>

@@ -1,38 +1,32 @@
 <script setup lang="ts">
-import { ref , onMounted} from "vue";
+import { ref, onMounted } from "vue";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const name = ref("");
 const email = ref("");
 const message = ref("");
 const isLoading = ref(true);
+
 onMounted(() => {
   isLoading.value = true;
   setTimeout(() => {
     isLoading.value = false;
-  }, 300); // Show loader for 1.5 seconds
+  }, 300);
 });
+
 const sendMessage = () => {
   const text = `Hi Aishwarya,
 
 Name: ${name.value}
-
 Email: ${email.value}
-
 Message: ${message.value}`;
 
   // Open WhatsApp
-  const whatsappUrl = `https://wa.me/919791719807?text=${encodeURIComponent(
-    text
-  )}`;
-
+  const whatsappUrl = `https://wa.me/919791719807?text=${encodeURIComponent(text)}`;
   window.open(whatsappUrl, "_blank");
 
   // Open email client
-  const mailUrl = `mailto:aishu30401@gmail.com?subject=Portfolio Contact&body=${encodeURIComponent(
-    text
-  )}`;
-
+  const mailUrl = `mailto:aishu30401@gmail.com?subject=Portfolio Contact&body=${encodeURIComponent(text)}`;
   setTimeout(() => {
     window.location.href = mailUrl;
   }, 1000);
@@ -53,82 +47,99 @@ const scrollToTop = () => {
 
 <template>
   <div v-if="isLoading" class="loader-container">
-  <div class="loader"></div>
-</div>
+    <div class="loader"></div>
+  </div>
+
   <section class="contact-section" v-else>
     <div class="container">
       <!-- Left Side -->
-
       <div class="left">
         <h1>Let's Work Together</h1>
-
         <p>Have a project in mind? Let's connect.</p>
 
         <div class="info-list">
-          <div class="info-item">
-            <div class="icon">
+          <!-- Email (Gmail Red) -->
+          <a href="mailto:aishu30401@gmail.com" class="info-item">
+            <div class="icon gmail-icon">
               <i class="fas fa-envelope"></i>
             </div>
-
             <div>
               <h4>Email</h4>
               <span>aishu30401@gmail.com</span>
             </div>
-          </div>
+          </a>
 
-          <div class="info-item">
-            <div class="icon">
-              <i class="fas fa-phone"></i>
+          <!-- Phone & WhatsApp -->
+          <div class="info-item combo-item">
+            <div class="icon whatsapp-icon">
+              <i class="fab fa-whatsapp"></i>
             </div>
-
             <div>
-              <h4>Phone</h4>
-              <span>+91 9791719807</span>
+              <h4>Phone / WhatsApp</h4>
+              <div class="link-group">
+                <a href="tel:+919791719807" class="sub-link">+91 9791719807</a>
+                <span class="divider">|</span>
+                <a
+                  href="https://wa.me/919791719807"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="sub-link wa-btn"
+                >
+                  Chat on WhatsApp <i class="fab fa-whatsapp"></i>
+                </a>
+              </div>
             </div>
           </div>
 
-          <div class="info-item">
-            <div class="icon">
+          <!-- Location -->
+          <div class="info-item static-item">
+            <div class="icon location-icon">
               <i class="fas fa-location-dot"></i>
             </div>
-
             <div>
               <h4>Location</h4>
               <span>Coimbatore, Tamil Nadu, India</span>
             </div>
           </div>
 
-          <div class="info-item">
-            <div class="icon">
+          <!-- LinkedIn -->
+          <a
+            href="https://www.linkedin.com/in/aishwarya-v-4141131b4/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="info-item"
+          >
+            <div class="icon linkedin-icon">
               <i class="fab fa-linkedin-in"></i>
             </div>
-
             <div>
               <h4>LinkedIn</h4>
-              <span>linkedin.com/in/aishwarya-v-960692408</span>
+              <span>linkedin.com/in/aishwarya-v-4141131b4/</span>
             </div>
-          </div>
+          </a>
 
-          <div class="info-item">
-            <div class="icon">
+          <!-- GitHub -->
+          <a
+            href="https://github.com/Aishwarya30401"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="info-item"
+          >
+            <div class="icon github-icon">
               <i class="fab fa-github"></i>
             </div>
-
             <div>
               <h4>GitHub</h4>
               <span>github.com/Aishwarya30401</span>
             </div>
-          </div>
+          </a>
         </div>
       </div>
 
       <!-- Right Side -->
-
       <div class="right">
         <form @submit.prevent="sendMessage">
-          
           <label>Your Name</label>
-
           <input
             v-model="name"
             type="text"
@@ -137,7 +148,6 @@ const scrollToTop = () => {
           />
 
           <label>Your Email</label>
-
           <input
             v-model="email"
             type="email"
@@ -146,7 +156,6 @@ const scrollToTop = () => {
           />
 
           <label>Your Message</label>
-
           <textarea
             v-model="message"
             rows="6"
@@ -162,16 +171,28 @@ const scrollToTop = () => {
       </div>
     </div>
 
-    <!-- Footer -->
-
+    <!-- Enhanced Modern Footer -->
     <footer>
-      <h2>AV</h2>
+      <div class="footer-container">
+        <div class="footer-brand">
+          <span class="logo-text">AV</span>
+          <span class="brand-tag">Portfolio</span>
+        </div>
 
-      <p>© 2026 Aishwarya V. All rights reserved.</p>
+        <div class="footer-center">
+          <p>© 2026 Aishwarya V. All rights reserved.</p>
+        </div>
 
-      <button class="top-btn" @click="scrollToTop">
-        <i class="fas fa-arrow-up"></i>
-      </button>
+        <div class="footer-actions">
+          <button
+            class="top-btn"
+            @click="scrollToTop"
+            aria-label="Scroll to top"
+          >
+            <i class="fas fa-arrow-up"></i>
+          </button>
+        </div>
+      </div>
     </footer>
   </section>
 </template>
@@ -187,14 +208,15 @@ const scrollToTop = () => {
   min-height: 100vh;
   background: #07101d;
   color: white;
-  padding: 60px 80px;
+  padding: 60px 80px 30px;
 }
 
 .container {
   display: flex;
   justify-content: space-between;
   gap: 50px;
-  min-height: 100vh;
+  min-height: auto;
+  margin-bottom: 60px;
 }
 
 .left {
@@ -208,42 +230,117 @@ const scrollToTop = () => {
 
 .left p {
   color: #b0b0b0;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 .info-list {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 25px;
 }
 
-.info-item {
+/* Clickable Link Items */
+a.info-item,
+.combo-item,
+.static-item {
   display: flex;
   align-items: center;
   gap: 18px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s ease;
+}
+
+a.info-item:hover {
+  transform: translateX(6px);
+}
+
+a.info-item:hover span {
+  color: #a855f7;
+  text-decoration: underline;
 }
 
 .icon {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #8b5cf6, #a855f7);
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
+}
+
+/* Official Brand Icon Colors */
+.gmail-icon {
+  background: linear-gradient(135deg, #ea4335, #c5221f);
+}
+
+.whatsapp-icon {
+  background: linear-gradient(135deg, #25d366, #128c7e);
+}
+
+.location-icon {
+  background: linear-gradient(135deg, #ea4335, #4285f4);
+}
+
+.linkedin-icon {
+  background: linear-gradient(135deg, #0a66c2, #004182);
+}
+
+.github-icon {
+  background: linear-gradient(135deg, #24292e, #161b22);
+  border: 1px solid #30363d;
 }
 
 .icon i {
-  font-size: 18px;
+  font-size: 20px;
+  color: white;
 }
 
 .info-item h4 {
-  margin-bottom: 5px;
+  margin-bottom: 4px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .info-item span {
   color: #b8b8b8;
-  word-break: break-word;
+  word-break: break-all;
+  font-size: 15px;
+  transition: color 0.25s ease;
+}
+
+/* Sub-links inside phone/whatsapp container */
+.link-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.sub-link {
+  color: #b8b8b8;
+  text-decoration: none;
+  font-size: 15px;
+  transition: color 0.2s ease;
+}
+
+.sub-link:hover {
+  color: #a855f7;
+  text-decoration: underline;
+}
+
+.wa-btn {
+  color: #25d366;
+  font-weight: 500;
+}
+
+.wa-btn:hover {
+  color: #34e775;
+}
+
+.divider {
+  color: #4b5563;
 }
 
 .right {
@@ -281,7 +378,7 @@ textarea:focus {
   border-color: #8b5cf6;
 }
 
-button {
+button[type="submit"] {
   width: 100%;
   margin-top: 25px;
   padding: 16px;
@@ -294,38 +391,89 @@ button {
   transition: 0.3s;
 }
 
-button:hover {
+button[type="submit"]:hover {
   transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.3);
 }
 
 button i {
   margin-left: 10px;
 }
 
+/* Enhanced Footer Styles */
 footer {
-  border-top: 1px solid #1f2937;
-  margin-top: 70px;
-  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 35px;
+  padding-bottom: 15px;
+}
+
+.footer-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-footer h2 {
-  font-size: 42px;
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-text {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, #ffffff, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-tag {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.12);
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+}
+
+.footer-center p {
+  color: #9ca3af;
+  font-size: 14px;
+  letter-spacing: 0.3px;
 }
 
 .top-btn {
-  width: 50px;
-  height: 50px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.25);
+}
+
+.top-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 22px rgba(168, 85, 247, 0.45);
+}
+
+.top-btn i {
+  font-size: 16px;
+  margin-left: 0;
 }
 
 /* Tablet */
-
 @media (max-width: 900px) {
   .contact-section {
-    padding: 30px;
+    padding: 40px 30px 20px;
   }
 
   .container {
@@ -341,17 +489,17 @@ footer h2 {
     font-size: 36px;
   }
 
-  footer {
+  .footer-container {
     flex-direction: column;
     gap: 20px;
+    text-align: center;
   }
 }
 
 /* Mobile */
-
 @media (max-width: 576px) {
   .contact-section {
-    padding: 20px;
+    padding: 30px 20px 15px;
   }
 
   .left h1 {
@@ -361,23 +509,17 @@ footer h2 {
   form {
     padding: 20px;
   }
-
-  footer h2 {
-    font-size: 32px;
-  }
 }
+
 .loader-container {
   position: fixed;
   top: 0;
   left: 0;
-
   width: 100%;
   height: 100vh;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   background: #07111f;
   z-index: 9999;
 }
@@ -385,12 +527,9 @@ footer h2 {
 .loader {
   width: 50px;
   height: 50px;
-
   border: 5px solid #b245ff;
   border-top: 5px solid #e5e5e5;
-
   border-radius: 50%;
-
   animation: spin 1s linear infinite;
 }
 

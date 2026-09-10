@@ -89,6 +89,7 @@ const certificates = [
 </script>
 
 <template>
+  
   <div v-if="isLoading" class="loader-container">
   <div class="loader"></div>
 </div>

@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { ref , onMounted} from "vue";
+import { ref, onMounted } from "vue";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
 const skills = [
   {
     name: "Vue.js",
@@ -12,6 +14,24 @@ const skills = [
     icon: "fas fa-mountain",
     percentage: 90,
     color: "#00dc82"
+  },
+  {
+    name: "React.js",
+    icon: "fab fa-react",
+    percentage: 85,
+    color: "#61dafb"
+  },
+  {
+    name: "Prompt Engineering",
+    icon: "fas fa-terminal",
+    percentage: 92,
+    color: "#10a37f"
+  },
+  {
+    name: "AI Agents Workflows",
+    icon: "fas fa-robot",
+    percentage: 88,
+    color: "#a855f7"
   },
   {
     name: "JavaScript",
@@ -43,33 +63,34 @@ const skills = [
     percentage: 90,
     color: "#7952b3"
   },
- {
-  name: "Pinia",
-  icon: "fas fa-layer-group",
-  percentage: 90,
-  color: "#ffd43b"
-},
+  {
+    name: "Pinia",
+    icon: "fas fa-layer-group",
+    percentage: 90,
+    color: "#ffd43b"
+  },
   {
     name: "Git & GitHub",
     icon: "fab fa-github",
     percentage: 90,
     color: "#ffffff"
   }
-]
+];
 
 const isLoading = ref(true);
+
 onMounted(() => {
-  // isLoading.value = true;
   setTimeout(() => {
     isLoading.value = false;
-  }, 300); // Show loader for 1.5 seconds
+  }, 300);
 });
 </script>
 
 <template>
   <div v-if="isLoading" class="loader-container">
-  <div class="loader"></div>
-</div>
+    <div class="loader"></div>
+  </div>
+
   <section class="skills" v-else>
     <div class="container">
       <div class="heading">
@@ -78,7 +99,7 @@ onMounted(() => {
       </div>
 
       <p class="subtitle">
-        Technologies I work with
+        Technologies & Frameworks I work with
       </p>
 
       <div class="skills-grid">
@@ -150,7 +171,7 @@ onMounted(() => {
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
 }
 
@@ -159,7 +180,7 @@ onMounted(() => {
   border: 1px solid rgba(178, 69, 255, .15);
   border-radius: 18px;
   padding: 28px;
-  transition: .35s;
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
 .skill-card:hover {
@@ -171,13 +192,14 @@ onMounted(() => {
 .skill-icon {
   font-size: 52px;
   margin-bottom: 25px;
+  display: inline-block;
 }
 
 .skill-info {
   display: flex;
   justify-content: space-between;
   color: white;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
   margin-bottom: 18px;
 }
@@ -195,18 +217,54 @@ onMounted(() => {
   border-radius: 30px;
   background: linear-gradient(90deg, #7b2ff7, #b245ff);
 }
+
+@media (max-width: 576px) {
+  .skills {
+    padding: 50px 15px;
+  }
+
+  .heading {
+    justify-content: center;
+  }
+
+  .heading h2 {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    text-align: center;
+    margin-left: 0;
+    margin-bottom: 30px;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .skill-card {
+    padding: 22px;
+  }
+
+  .skill-icon {
+    font-size: 44px;
+    margin-bottom: 18px;
+  }
+
+  .skill-info {
+    font-size: 18px;
+  }
+}
+
 .loader-container {
   position: fixed;
   top: 0;
   left: 0;
-
   width: 100%;
   height: 100vh;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   background: #07111f;
   z-index: 9999;
 }
@@ -214,12 +272,9 @@ onMounted(() => {
 .loader {
   width: 50px;
   height: 50px;
-
   border: 5px solid #b245ff;
   border-top: 5px solid #e5e5e5;
-
   border-radius: 50%;
-
   animation: spin 1s linear infinite;
 }
 

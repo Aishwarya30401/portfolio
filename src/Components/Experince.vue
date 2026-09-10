@@ -1,94 +1,118 @@
-<script>
-import { ref , onMounted} from "vue";
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
 
 const isLoading = ref(true);
 onMounted(() => {
-  // isLoading.value = true;
   setTimeout(() => {
     isLoading.value = false;
-  }, 300); // Show loader for 1.5 seconds
+  }, 300);
 });
 </script>
 
 <template>
   <div v-if="isLoading" class="loader-container">
-  <div class="loader"></div>
-</div>
+    <div class="loader"></div>
+  </div>
+
   <section class="experience-section" v-else>
     <div class="header">
       <span class="dot"></span>
       <div>
-        <h1>Experience</h1>
-        <p>My professional journey</p>
+        <h1>Experience & Project Work</h1>
+        <p>My professional journey and featured projects</p>
       </div>
     </div>
 
     <div class="timeline">
-
-      <!-- Item 1 -->
+      <!-- Professional Work -->
       <div class="timeline-item">
-        <div class="icon">
-          💼
-        </div>
-
+        <div class="icon active">💼</div>
         <div class="card">
           <span class="year">2023 - Present</span>
-
-          <h2>software Engineer</h2>
-
+          <h2>Software Engineer</h2>
           <h4>Span Technologies Services Private Limited</h4>
-
           <ul>
-            <li>Building scalable web applications using Vue 3, Nuxt.js and TypeScript.</li>
+            <li>Building scalable web applications using Vue 3, Nuxt.js, and TypeScript.</li>
             <li>Developing reusable components and optimizing performance.</li>
-            <li>Integrating REST APIs and managing state using Pinia.</li>
-            <li>Collaborating with cross-functional teams in Agile environment.</li>
+            <li>Integrating REST APIs and managing application state using Pinia.</li>
+            <li>Collaborating with cross-functional teams in an Agile environment.</li>
           </ul>
         </div>
       </div>
 
-      <!-- Item 2 -->
-      <!-- <div class="timeline-item">
-        <div class="icon active">
-          💼
-        </div>
-
-        <div class="card">
-          <span class="year">2022 - 2023</span>
-
-          <h2>Frontend Developer</h2>
-
-          <h4>Span Technologies Services Private Limited</h4>
-
-          <ul>
-            <li>Worked on Vue 2 based projects and migrated to Vue 3.</li>
-            <li>Integrated Firebase authentication and SSO.</li>
-            <li>Improved application performance and SEO.</li>
-          </ul>
-        </div>
-      </div> -->
-
-      <!-- Item 3 -->
+      <!-- TaxBandits Project -->
       <div class="timeline-item">
-        <div class="icon">
-          💼
-        </div>
-
+        <div class="icon">🚀</div>
         <div class="card">
-          <span class="year">2022 - 2023</span>
-
-          <h2>Jr. Frontend Developer</h2>
-
-          <h4>Zen N Zeal Private Limited</h4>
-
+          <span class="year">2023 - 2024</span>
+          <h2>TaxBandits Platform Development</h2>
+          <h4>Key Technical Project</h4>
           <ul>
-            <li>Developed responsive UI using Vue.js and Bootstrap.</li>
-            <li>Developed responsive UI using Html, Css, Wordpress.</li>
-            <li>Fixed bugs and improved user experience.</li>
+            <li>Developed responsive, accessible UI components for complex tax filing workflows.</li>
+            <li>Architected and migrated components across Vue 2 and Vue 3 environments using Nuxt.js.</li>
+            <li>Integrated REST APIs with state management using Composition & Options APIs.</li>
           </ul>
         </div>
       </div>
 
+      <!-- Book Discovery App Project -->
+      <div class="timeline-item">
+        <div class="icon">📚</div>
+        <div class="card">
+          <span class="year">2024</span>
+          <h2>Shelf - Book Discovery App</h2>
+          <h4>Featured Web Application</h4>
+          <ul>
+            <li>Engineered a dynamic book search and cataloging application using Vue.js & TypeScript.</li>
+            <li>Implemented persistent state management using Pinia for saved collections.</li>
+            <li>Integrated external REST APIs for real-time book metadata and search indexing.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Plant Discovery App Project -->
+      <div class="timeline-item">
+        <div class="icon">🌿</div>
+        <div class="card">
+          <span class="year">2024</span>
+          <h2>Plant Discovery Application</h2>
+          <h4>Interactive Web Application</h4>
+          <ul>
+            <li>Designed and built an interactive botanical exploration interface using Vue.js and Vite.</li>
+            <li>Created responsive UI layouts using modern CSS3 flexbox and grid architectures.</li>
+            <li>Optimized page load speed and asset bundling for seamless mobile access.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Auth & Portfolio Work -->
+      <div class="timeline-item">
+        <div class="icon">🔒</div>
+        <div class="card">
+          <span class="year">2023</span>
+          <h2>Auth System & Personal Portfolio</h2>
+          <h4>Independent Engineering Projects</h4>
+          <ul>
+            <li>Implemented Firebase Authentication and Single Sign-On (SSO) with route guards and session management.</li>
+            <li>Designed and built a modern personal developer portfolio using Vue 3, TypeScript, and Vite.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Junior Role -->
+      <div class="timeline-item">
+        <div class="icon">💼</div>
+        <div class="card">
+          <span class="year">2022 - 2023</span>
+          <h2>Jr. Frontend Developer</h2>
+          <h4>Zen N Zeal Private Limited</h4>
+          <ul>
+            <li>Developed responsive UI layouts using Vue.js, HTML5, CSS3, and Bootstrap.</li>
+            <li>Maintained custom WordPress templates and frontend interface components.</li>
+            <li>Resolved UI bugs and improved overall user interface consistency.</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -96,20 +120,23 @@ onMounted(() => {
 <style scoped>
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .experience-section {
   min-height: 100vh;
-  padding: 50px;
+  padding: 50px 20px;
   background: #08111f;
   color: white;
 }
 
 .header {
+  max-width: 1000px;
+  margin: 0 auto 40px auto;
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 40px;
 }
 
 .dot {
@@ -117,10 +144,10 @@ onMounted(() => {
   height: 10px;
   background: #9d4edd;
   border-radius: 50%;
+  box-shadow: 0 0 10px #9d4edd;
 }
 
 .header h1 {
-  margin: 0;
   font-size: 34px;
 }
 
@@ -130,14 +157,16 @@ onMounted(() => {
 }
 
 .timeline {
+  max-width: 1000px;
+  margin: 0 auto;
   position: relative;
-  padding-left: 40px;
+  padding-left: 50px;
 }
 
 .timeline::before {
   content: "";
   position: absolute;
-  left: 18px;
+  left: 20px;
   top: 0;
   width: 2px;
   height: 100%;
@@ -147,26 +176,29 @@ onMounted(() => {
 .timeline-item {
   display: flex;
   gap: 24px;
-  margin-bottom: 40px;
+  margin-bottom: 35px;
   position: relative;
 }
 
 .icon {
   width: 42px;
   height: 42px;
-  background: #2d3748;
+  background: #1e293b;
+  border: 1px solid #334155;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  font-size: 18px;
   position: absolute;
-  left: -42px;
+  left: -51px;
+  top: 0;
   z-index: 2;
 }
 
 .active {
   background: linear-gradient(135deg, #9d4edd, #6d28d9);
+  border-color: #a855f7;
 }
 
 .card {
@@ -175,28 +207,31 @@ onMounted(() => {
   border: 1px solid #2d3748;
   border-radius: 14px;
   padding: 24px;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-5px);
   border-color: #9d4edd;
+  box-shadow: 0 10px 25px rgba(157, 78, 221, 0.15);
 }
 
 .year {
   color: #a855f7;
   font-size: 14px;
+  font-weight: 600;
 }
 
 .card h2 {
-  margin: 12px 0 8px;
-  font-size: 28px;
+  margin: 10px 0 6px;
+  font-size: 24px;
 }
 
 .card h4 {
   color: #c084fc;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   font-weight: 500;
+  font-size: 16px;
 }
 
 .card ul {
@@ -204,35 +239,46 @@ onMounted(() => {
 }
 
 .card li {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   color: #d1d5db;
   line-height: 1.6;
+  font-size: 15px;
 }
 
 @media (max-width: 768px) {
   .experience-section {
-    padding: 20px;
+    padding: 30px 15px;
+  }
+
+  .timeline {
+    padding-left: 35px;
+  }
+
+  .timeline::before {
+    left: 12px;
+  }
+
+  .icon {
+    left: -38px;
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
   }
 
   .card h2 {
-    font-size: 22px;
+    font-size: 20px;
   }
-  .container {
-  min-height: 100vh;
 }
-}
+
 .loader-container {
   position: fixed;
   top: 0;
   left: 0;
-
   width: 100%;
   height: 100vh;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   background: #07111f;
   z-index: 9999;
 }
@@ -240,12 +286,9 @@ onMounted(() => {
 .loader {
   width: 50px;
   height: 50px;
-
   border: 5px solid #b245ff;
   border-top: 5px solid #e5e5e5;
-
   border-radius: 50%;
-
   animation: spin 1s linear infinite;
 }
 

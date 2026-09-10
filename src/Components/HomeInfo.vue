@@ -4,9 +4,11 @@ import { ref, onMounted } from "vue";
 
 const downloadResume = () => {
   const link = document.createElement("a");
-  link.href = "/Aishwarya_Resume_1.pdf";
-  link.download = "Aishwarya_Resume_1.pdf";
+  link.href = "/Aishwarya_V_Resume_(1).pdf";
+  link.download = "Aishwarya_V_Resume_(1).pdf";
+  document.body.appendChild(link); // Append to body for cross-browser support
   link.click();
+  document.body.removeChild(link); // Clean up DOM
 };
 
 const letsTalk = () => {
@@ -43,7 +45,7 @@ onMounted(() => {
         <h2>Frontend Developer</h2>
 
         <p class="tech">
-          Vue.js | Nuxt.js | TypeScript | JavaScript | Wordpress | Firebase
+          Vue.js | React.js | Nuxt.js | TypeScript | JavaScript | Wordpress | Firebase
         </p>
 
         <p class="description">
@@ -58,7 +60,7 @@ onMounted(() => {
         <!-- SOCIAL ICONS -->
         <div class="socials">
           <a
-            href="https://www.linkedin.com/in/aishwarya-v-960692408/"
+            href="https://www.linkedin.com/in/aishwarya-v-4141131b4/"
             target="_blank"
             rel="noopener noreferrer"
             title="LinkedIn"
@@ -85,11 +87,15 @@ onMounted(() => {
         </div>
       </div>
 
-      <!-- RIGHT IMAGE -->
+      <!-- RIGHT IMAGE (RESPONSIVE & CLEAN CIRCLE) -->
       <div class="right">
         <div class="profile-wrapper">
           <div class="avatar-circle">
-            <img src="../assets/Gemini_Generated_Image_t22ck0t22ck0t22c.png" alt="Aishwarya Profile" class="profile-img" />
+            <img 
+              src="../assets/Gemini_Generated_Image_t22ck0t22ck0t22c.png" 
+              alt="Aishwarya Profile" 
+              class="profile-img" 
+            />
           </div>
 
           <div class="experience">
@@ -115,14 +121,14 @@ onMounted(() => {
   width: 100%;
 }
 
-/* CONSTRAINED CENTERED CONTAINER (Fixes ultra-wide dispersion) */
+/* CONSTRAINED CENTERED CONTAINER */
 .hero-container {
   width: 100%;
   max-width: 1200px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 40px;
+  gap: 50px;
   margin: 0 auto;
 }
 
@@ -164,6 +170,7 @@ h2 {
   font-size: clamp(0.9rem, 1.2vw, 1.1rem);
   margin-bottom: 16px;
   line-height: 1.5;
+  font-weight: 500;
 }
 
 .description {
@@ -240,39 +247,50 @@ h2 {
   transform: translateY(-4px);
 }
 
-/* RIGHT SECTION - ENLARGED PROFILE CIRCLE */
+/* RIGHT SECTION - ENHANCED IMAGE DISPLAY */
 .right {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .profile-wrapper {
   position: relative;
   width: 100%;
-  max-width: 440px; /* Bigger size for hero prominence */
-  aspect-ratio: 1 / 1;
+  max-width: 380px;
+  aspect-ratio: 1 / 1; /* Locks 1:1 square ratio to prevent squishing into an oval */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Multi-color gradient ring with soft glow */
+/* Glowing circular border ring */
 .avatar-circle {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  padding: 6px;
+  padding: 5px;
   background: linear-gradient(135deg, #ff65d8, #7b2ff7, #6d7bff);
-  box-shadow: 0 0 50px rgba(178, 69, 255, 0.35);
+  box-shadow: 0 0 40px rgba(178, 69, 255, 0.4);
   box-sizing: border-box;
+  animation: glowPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 25px rgba(178, 69, 255, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 50px rgba(178, 69, 255, 0.6);
+  }
 }
 
 .profile-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Prevents image distortion */
   border-radius: 50%;
   display: block;
 }
@@ -280,23 +298,25 @@ h2 {
 /* FLOATING EXPERIENCE BADGE */
 .experience {
   position: absolute;
-  right: -5px;
-  bottom: 20px;
-  background: rgba(20, 26, 40, 0.94);
+  right: -10px;
+  bottom: 15px;
+  background: rgba(15, 23, 42, 0.92);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(178, 69, 255, 0.3);
   border-radius: 18px;
-  padding: 16px 24px;
+  padding: 14px 22px;
   text-align: center;
   z-index: 2;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
 }
 
 .experience h2 {
   color: #b44dff;
-  font-size: 2.1rem;
+  font-size: 2rem;
   margin: 0;
   line-height: 1;
+  font-weight: 700;
 }
 
 .experience p {
@@ -335,15 +355,15 @@ h2 {
 /* RESPONSIVE MEDIA QUERIES */
 @media (max-width: 1024px) {
   .profile-wrapper {
-    max-width: 380px;
+    max-width: 320px;
   }
 }
 
 @media (max-width: 900px) {
   .hero-container {
-    flex-direction: column-reverse;
+    flex-direction: column-reverse; /* Places profile image on top on mobile/tablet */
     text-align: center;
-    gap: 36px;
+    gap: 40px;
   }
 
   .left {
@@ -359,23 +379,32 @@ h2 {
   }
 
   .profile-wrapper {
-    max-width: 330px;
+    max-width: 280px;
   }
 
   .experience {
-    right: 0px;
-    bottom: -10px;
-    padding: 12px 18px;
+    right: 50%;
+    transform: translateX(50%);
+    bottom: -25px;
+    padding: 10px 18px;
   }
 }
 
 @media (max-width: 480px) {
   .hero {
-    padding: 30px 16px;
+    padding: 20px 16px 40px 16px;
   }
 
   .profile-wrapper {
-    max-width: 260px;
+    max-width: 220px;
+  }
+
+  .experience h2 {
+    font-size: 1.6rem;
+  }
+
+  .experience p {
+    font-size: 0.75rem;
   }
 
   .buttons {
@@ -386,13 +415,6 @@ h2 {
   .resume,
   .talk {
     width: 100%;
-  }
-
-  .experience {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    margin-top: 16px;
   }
 }
 </style>
